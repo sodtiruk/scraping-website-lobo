@@ -1,0 +1,52 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'db'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '4001:3306'
+    networks:
+      - my_network
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - '5001:80'
+    environment:
+      - MYSQL_USER=user  # กำหนดชื่อผู้ใช้
+      - MYSQL_PASSWORD=password  # กำหนดรหัสผ่าน
+      - MYSQL_HOST=db # กำหนดชื่อ host ของ MySQL server ที่จะ connect
+      - MYSQL_ROOT_PASSWORD=root
+    networks:
+      - my_network
+
+  app:
+    image: loboapp:1.0
+    # env_file:
+    #   - .env
+    environment:
+      HOST: db
+      PORT: 3306
+      USER: user
+      PASSWORD: password
+      DATABASE: db
+      # create table database auto you can change name
+      TABLE: lobo
+    depends_on:
+      - db
+    networks:
+      - my_network
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+
+networks:
+  my_network: 
+    driver: bridge
+
