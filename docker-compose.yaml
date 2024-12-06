@@ -14,7 +14,7 @@ services:
       - my_network
 
   phpmyadmin:
-    image: phpmyadmin
+    image: phpmyadmin:latest
     restart: always
     ports:
       - '5001:80'
