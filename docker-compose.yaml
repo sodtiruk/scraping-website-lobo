@@ -27,9 +27,13 @@ services:
       - my_network
 
   app:
-    image: loboapp:1.0
+    # image: loboapp:1.0
     # env_file:
     #   - .env
+    image: loboapp:1.0
+    build: 
+      context: . 
+      dockerfile: ./dockerfile 
     environment:
       HOST: db
       PORT: 3306
