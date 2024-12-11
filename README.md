@@ -10,5 +10,7 @@ pip install -r requirements.txt
 # Run Script
 python main.py
 
+# Docker
+docker-compose up --build
 
 
