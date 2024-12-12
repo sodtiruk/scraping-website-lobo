@@ -13,4 +13,6 @@ python main.py
 # Docker
 docker-compose up --build
 
+***
+If you use Docker, you can run a single command, and it will automatically create the database for you. Then, you can access the database directly through PhpMyAdmin.
 
